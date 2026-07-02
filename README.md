@@ -1,6 +1,6 @@
-# Hasila MVP
+# Tawam "التوأم" MVP
 
-Hasila is an AI-powered financial twin MVP built with Next.js, FastAPI, LangChain, and ChromaDB. It demonstrates a personalized financial assistant that blends a financial profile, scenario simulation, and retrieval-augmented guidance.
+Tawam "التوأم" is an AI-powered financial twin MVP built with Next.js, FastAPI, LangChain, and ChromaDB. It demonstrates a personalized financial assistant that blends a financial profile, scenario simulation, and retrieval-augmented guidance.
 
 ## Structure
 - frontend/: Next.js and Tailwind UI
