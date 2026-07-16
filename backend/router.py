@@ -401,8 +401,8 @@ How to write the answer:
 - Compare the options briefly - the UI already renders the scenario cards, so do not list
   them all out mechanically. Explain the trade-off between the best two.
 - If there is an alert, address it head-on. This is the most important part of the answer.
-- Ground your advice in the knowledge base and cite the source filename inline, like this:
-  (source: emergency_fund.md). Cite at least one source.
+- Ground your advice in the knowledge base, but never reveal, name, or quote the source
+  filenames to the user. Present the guidance naturally, as if it were your own knowledge.
 - Format as short markdown. Bold the key numbers. 120-180 words. No headings.
 - Currency is SAR. Write amounts as "120,000 SAR".
 
@@ -461,7 +461,8 @@ def answer_purchase(
 ) -> str:
     user_prompt = (
         f"FINANCIAL TWIN (the user's profile):\n{profile.summary_for_llm()}\n\n"
-        f"KNOWLEDGE BASE (retrieved passages - cite the source filenames):\n"
+        f"KNOWLEDGE BASE (retrieved passages - use these to ground your advice; do NOT "
+        f"reveal the filenames to the user):\n"
         f"{rag.format_context(passages)}\n\n"
         f"SIMULATION (deterministic - these numbers are correct, use them):\n"
         f"{_scenario_digest(result)}\n\n"
@@ -530,10 +531,8 @@ def template_purchase_answer(
         lines.append("")
         lines.append(t("tpl.goal_delay", lang, months=best.goal_delay_months))
 
-    if passages:
-        lines.append("")
-        lines.append(t("tpl.source", lang, source=passages[0]["source"]))
-
+    # The knowledge base grounds the advice on the backend, but we never surface the
+    # source filename to the user.
     return "\n".join(lines)
 
 
@@ -553,7 +552,8 @@ def answer_question(
     )
     user_prompt = (
         f"FINANCIAL TWIN (the user's profile):\n{profile.summary_for_llm()}\n\n"
-        f"KNOWLEDGE BASE (retrieved passages - cite the source filenames):\n"
+        f"KNOWLEDGE BASE (retrieved passages - use these to ground your advice; do NOT "
+        f"reveal the filenames to the user):\n"
         f"{rag.format_context(passages)}\n\n"
         f"CONVERSATION:\n{_history_text(history)}\n\n"
         f"USER'S QUESTION: {message}\n\n"
@@ -578,8 +578,9 @@ def template_question_answer(
             target=i18n.sar(profile.emergency_fund_target, lang),
         )
     top = passages[0]
-    # The knowledge base is authored in English; in Arabic we still cite it, but we do not
-    # paste an English wall of text into an Arabic answer.
+    # The knowledge base is authored in English; in Arabic we ground on it silently rather
+    # than paste an English wall of text into an Arabic answer. Either way the source
+    # filename is never shown to the user.
     intro = t(
         "tpl.kb_intro",
         lang,
@@ -587,9 +588,9 @@ def template_question_answer(
         surplus=i18n.sar(profile.monthly_surplus, lang),
     )
     if lang == "ar":
-        return f"{intro}\n\n{t('tpl.source', lang, source=top['source'])}"
+        return intro
     excerpt = top["content"][:600].rsplit(" ", 1)[0]
-    return f"{intro}\n\n{excerpt}…\n\n{t('tpl.source', lang, source=top['source'])}"
+    return f"{intro}\n\n{excerpt}…"
 
 
 CHITCHAT_SYSTEM = """You are Twin, a Saudi personal-finance assistant. Reply to small talk

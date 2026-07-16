@@ -179,7 +179,7 @@ Premium fintech aesthetic — minimal, modern, glassmorphism, rounded cards, sof
 - [ ] Runs with only a Groq key (embeddings fall back to local model)
 - [ ] "What if I buy a car for 120,000 SAR?" returns 4 scenario cards with mathematically correct numbers (verifiable by hand from the profile)
 - [ ] Scenario numbers come from `simulation.py`, not the LLM
-- [ ] Answer cites at least one knowledge-base source
+- [ ] Answer is grounded in the knowledge base (retrieved passages feed the prompt), but the source filenames are never shown to the user
 - [ ] A purchase that breaks the emergency fund triggers the alert banner
 - [ ] Dashboard health score and timeline load from the API
 - [ ] No crash on API failure — graceful error message instead

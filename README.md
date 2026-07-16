@@ -175,8 +175,9 @@ knowing:
   banking apps do, and it keeps the figures checkable against the English view at a glance.
 - **The knowledge base stays English.** The local embedding model only speaks English, so an
   Arabic question is *searched* in English (the router emits an English `topic_en` for
-  retrieval) and *answered* in Arabic, citing the English source filename. Retrieval quality
-  is therefore identical in both languages.
+  retrieval) and *answered* in Arabic. The retrieved passages ground the answer, but the
+  source filenames are never surfaced to the user. Retrieval quality is therefore identical
+  in both languages.
 
 Arabic also works with **no Groq key at all**: the rule-based router understands Arabic
 prices ("120 ألف"), recurring costs ("300 ريال شهريًا") and salary shocks

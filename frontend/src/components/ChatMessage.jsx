@@ -145,17 +145,8 @@ export default function ChatMessage({ message, emergencyFloor }) {
               </>
             )}
 
-            {message.sources?.length > 0 && (
-              <div className="sources">
-                <span>{t('chat.groundedIn')}</span>
-                {message.sources.map((s) => (
-                  <span className="source-chip" key={`${s.source}-${s.score}`}>
-                    {/* Filenames are Latin — keep them LTR inside an RTL sentence. */}
-                    <bdi>{s.source}</bdi>
-                  </span>
-                ))}
-              </div>
-            )}
+            {/* Source filenames are intentionally not shown to the user. The RAG passages
+                still ground the answer on the backend — they are just not surfaced here. */}
           </>
         )}
       </div>
