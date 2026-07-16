@@ -1,0 +1,25 @@
+# Secrets — never commit these.
+.env
+.env.local
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# The persisted vector store is a build artefact — regenerate it with:
+#   python backend/ingest.py
+backend/chroma_db/
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
