@@ -1063,7 +1063,7 @@ h1.hero-title em {
   cursor: pointer;
   transition: all 0.24s var(--ease);
   animation: fade-up 0.45s var(--ease) both;
-  text-align: left;
+  text-align: start;
   width: 100%;
   display: block;
 }
