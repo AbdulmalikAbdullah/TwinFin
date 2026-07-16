@@ -1,7 +1,7 @@
 /**
  * The only place that talks to the backend.
  *
- * Every call resolves — none of these ever throw. A failed request comes back as
+ * Every call resolves   none of these ever throw. A failed request comes back as
  * `{ error: "..." }` so callers render a friendly message instead of a blank screen.
  * That is the whole error strategy: the demo must never show a stack trace.
  *

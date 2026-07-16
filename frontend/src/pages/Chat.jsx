@@ -4,7 +4,7 @@ import { getProfile, sendChat } from '../lib/api'
 import { useLang } from '../lib/i18n'
 
 /**
- * The demo script, as buttons — in whichever language is active. These are the questions
+ * The demo script, as buttons   in whichever language is active. These are the questions
  * the Twin is built to answer, and they double as the fastest way to show what it does.
  */
 const CHIP_KEYS = ['chat.chip1', 'chat.chip2', 'chat.chip3', 'chat.chip4', 'chat.chip5']
@@ -45,7 +45,7 @@ export default function Chat() {
     const question = text.trim()
     if (!question || busy) return
 
-    // Only the plain text goes into history — the backend router needs the conversation,
+    // Only the plain text goes into history   the backend router needs the conversation,
     // not the rendered components.
     const history = messages.map((m) => ({ role: m.role, content: m.content }))
 
@@ -135,7 +135,7 @@ export default function Chat() {
               disabled={busy || !input.trim()}
               aria-label={t('chat.send')}
             >
-              {/* An upward arrow reads the same in both directions — no flip needed. */}
+              {/* An upward arrow reads the same in both directions   no flip needed. */}
               <svg viewBox="0 0 24 24" fill="none" width="18" height="18" aria-hidden="true">
                 <path
                   d="M12 19V5m-6.5 6.5L12 5l6.5 6.5"

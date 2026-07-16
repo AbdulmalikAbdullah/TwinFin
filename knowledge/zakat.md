@@ -5,7 +5,7 @@ qualifying wealth that has been held for a full lunar year (a *hawl*).
 
 ## What you pay zakat on
 
-Zakat is due on **zakatable assets** — broadly, wealth that is held or grows — not on
+Zakat is due on **zakatable assets**   broadly, wealth that is held or grows   not on
 everything you own:
 
 - **Cash** in hand and in bank accounts. Yes.
@@ -14,7 +14,7 @@ everything you own:
   long-term for dividends are commonly zakated on the underlying zakatable assets, but many
   scholars accept the simpler full-market-value approach.)
 - **Money owed to you** that you reasonably expect to recover. Yes.
-- **Your home, your car, your furniture, your phone.** No — personal-use assets are exempt,
+- **Your home, your car, your furniture, your phone.** No   personal-use assets are exempt,
   no matter how expensive.
 - **Debts you owe** that are due now are generally deducted from the base.
 
@@ -22,7 +22,7 @@ everything you own:
 
 Zakat is only due if your zakatable wealth stays at or above the **nisab** for the full lunar
 year. Nisab is the value of 85 grams of gold (or 595 grams of silver; the gold standard is more
-commonly used in the Gulf). At roughly 300 SAR per gram, that is approximately **25,500 SAR** —
+commonly used in the Gulf). At roughly 300 SAR per gram, that is approximately **25,500 SAR**  
 but gold moves, so check the current figure at the time of calculation rather than relying on a
 number from last year.
 
@@ -44,7 +44,7 @@ zakat base.** If Saad spends 120,000 SAR of cash on a car for personal use:
     new zakatable base = 290,000 - 120,000 = 170,000 SAR
     new zakat due      = 170,000 x 2.5% = 4,250 SAR/year
 
-His zakat obligation falls by 3,000 SAR a year. This is a real, arithmetic consequence — but
+His zakat obligation falls by 3,000 SAR a year. This is a real, arithmetic consequence   but
 it is **not a reason to buy the car.** Spending 120,000 SAR to reduce a payment by 3,000 SAR is
 a terrible trade if you did not want the car anyway, and zakat is an act of worship, not a tax
 to be minimised. Treat the change as information, not motivation.

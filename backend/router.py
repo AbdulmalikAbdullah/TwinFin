@@ -45,8 +45,8 @@ LANG_INSTRUCTION = {
     "en": "Write your answer in English.",
     "ar": (
         "اكتب إجابتك بالعربية الفصحى المبسطة، بنبرة ودّية ومباشرة. "
-        "استخدم الأرقام اللاتينية (120,000) واكتب العملة هكذا: «120,000 ريال». "
-        "لا تترجم أسماء ملفات المصادر — اتركها كما هي (مثل: emergency_fund.md)."
+        "استخدم الأرقام اللاتينية (120,000) واكتب العملة هكذا: «120,000 ⃁». "
+        "لا تترجم أسماء ملفات المصادر   اتركها كما هي (مثل: emergency_fund.md)."
     ),
 }
 
@@ -85,7 +85,7 @@ Rules:
 
 The message may be in English or Arabic. Classify Arabic exactly the same way, and return
 `item` in the SAME language the user wrote in ("سيارة" for an Arabic message, "car" for an
-English one) — it is shown back to them. Prices are always plain digits: "120 ألف" -> 120000.
+English one)   it is shown back to them. Prices are always plain digits: "120 ألف" -> 120000.
 """
 
 
@@ -106,9 +106,9 @@ _PRICE_PATTERNS = [
     # 120k / 1.5k  ·  120 ألف
     (re.compile(r"(\d+(?:\.\d+)?)\s*k\b", re.I), 1_000),
     (re.compile(r"(\d+(?:\.\d+)?)\s*(?:ألف|الف)"), 1_000),
-    # 120,000 SAR / SAR 120000 / 120000 riyals / 120,000 ريال / ر.س 120000
-    (re.compile(r"(?:sar|sr|riyals?|ريال|ر\.?س)\s*([\d,]+(?:\.\d+)?)", re.I), 1),
-    (re.compile(r"([\d,]+(?:\.\d+)?)\s*(?:sar|sr|riyals?|ريال|ر\.?س)", re.I), 1),
+    # 120,000 SAR / SAR 120000 / 120000 riyals / 120,000 ⃁ / ر.س 120000
+    (re.compile(r"(?:sar|sr|riyals?|⃁|ر\.?س)\s*([\d,]+(?:\.\d+)?)", re.I), 1),
+    (re.compile(r"([\d,]+(?:\.\d+)?)\s*(?:sar|sr|riyals?|⃁|ر\.?س)", re.I), 1),
     # bare number, 3+ digits
     (re.compile(r"\b(\d{3,}(?:,\d{3})*(?:\.\d+)?)\b"), 1),
 ]
@@ -292,7 +292,7 @@ def classify_fallback(message: str, history: list[dict[str, str]]) -> dict[str, 
     if price is not None:
         slots["intent"] = PURCHASE
         slots["price"] = price
-        # Left as None if unnamed — the engine picks a language-appropriate noun.
+        # Left as None if unnamed   the engine picks a language-appropriate noun.
         slots["item"] = item
         slots["recurring"] = bool(_RECURRING.search(message))
         if re.search(r"financ|instal?lment|murabaha|loan|تمويل|مرابحة|قسط|أقساط", message, re.I):
@@ -622,7 +622,7 @@ def _retrieval_query(message: str, slots: dict[str, Any], subject: str, lang: st
     """Build the query we actually search the knowledge base with.
 
     In English the raw message plus the simulated subject works well. In Arabic it does
-    not — the corpus and the embedding model are both English — so we search with the
+    not   the corpus and the embedding model are both English   so we search with the
     English topic instead, falling back to the raw message if we somehow have neither.
     """
     topic = slots.get("topic_en") or ""

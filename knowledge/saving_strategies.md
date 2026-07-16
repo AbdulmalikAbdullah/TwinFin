@@ -10,7 +10,7 @@ before you have had a chance to spend it. Most Saudi banks support a standing or
 (amr mustadeem) between your own accounts. Set it for the day after salary lands.
 
 If your surplus is 7,800 SAR a month, a standing order of 6,000 SAR into a separate savings
-account still leaves 1,800 SAR of slack for the month's noise — and it guarantees 72,000 SAR a
+account still leaves 1,800 SAR of slack for the month's noise   and it guarantees 72,000 SAR a
 year of saving without a single act of willpower.
 
 ## Automate, then forget

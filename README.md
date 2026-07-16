@@ -1,10 +1,10 @@
-# Twin — your AI Financial Twin
+# Twin   your AI Financial Twin
 
 **Ask your Twin before you spend.**
 
-Twin simulates what a purchase actually does to your future — your savings, your monthly
+Twin simulates what a purchase actually does to your future   your savings, your monthly
 breathing room, your emergency fund, and how far it pushes back the goals you already said
-mattered — *before* you buy, and warns you when a decision is about to hurt.
+mattered   *before* you buy, and warns you when a decision is about to hurt.
 
 Built for a Saudi context: murabaha vs. conventional financing, zakat, SAMA-regulated bank
 terms, and a knowledge base written around them.
@@ -15,8 +15,8 @@ terms, and a knowledge base written around them.
 
 > **The LLM never does arithmetic.**
 
-Every number in the product — remaining savings, cash flow, emergency-fund cover, goal
-delay, the health score, the 12-month projection — is computed by a deterministic Python
+Every number in the product   remaining savings, cash flow, emergency-fund cover, goal
+delay, the health score, the 12-month projection   is computed by a deterministic Python
 engine (`backend/simulation.py`). The language model receives those figures as structured
 data and is only allowed to *explain* them.
 
@@ -42,7 +42,7 @@ pip install -r requirements.txt
 cp .env.example .env              # then paste your key into .env
                                   # free key: https://console.groq.com/keys
 
-# 3. Build the knowledge base (once — takes ~30s, downloads the local embedding model)
+# 3. Build the knowledge base (once   takes ~30s, downloads the local embedding model)
 python backend/ingest.py
 
 # 4. Start the backend  (http://127.0.0.1:5000)
@@ -56,7 +56,7 @@ npm run dev
 
 Open **http://localhost:5173**.
 
-> The backend takes ~10 seconds to start the first time — it is loading the local embedding
+> The backend takes ~10 seconds to start the first time   it is loading the local embedding
 > model. Wait for `Running on http://127.0.0.1:5000` before opening the UI.
 
 ### Before you present
@@ -72,11 +72,11 @@ python -m pytest backend/tests -q # 29 tests, all hand-verifiable from the profi
 
 | # | Ask | What it shows |
 |---|-----|---------------|
-| 1 | **What if I buy a car for 120,000 SAR?** | Four costed scenarios. He can afford it — Twin says *buy it* and doesn't manufacture a problem. |
-| 2 | **What if I buy a car for 220,000 SAR?** | 🔴 The alert fires. It would leave 30,000 SAR against a 54,000 SAR floor. Financing is *worse* — it craters his health score from 99 to 55. Twin recommends the low-risk option instead. |
+| 1 | **What if I buy a car for 120,000 SAR?** | Four costed scenarios. He can afford it   Twin says *buy it* and doesn't manufacture a problem. |
+| 2 | **What if I buy a car for 220,000 SAR?** | 🔴 The alert fires. It would leave 30,000 SAR against a 54,000 SAR floor. Financing is *worse*   it craters his health score from 99 to 55. Twin recommends the low-risk option instead. |
 | 3 | **Can I afford a 300 SAR/month subscription?** | A recurring commitment isn't a purchase: it doesn't dent savings, it permanently narrows cash flow. Different scenarios, same cards. |
 | 4 | **What if I wait six months?** | A follow-up with no price in it. Twin resolves "it" from the conversation. |
-| 5 | **What happens if my salary drops 20%?** | An income shock, not a purchase. The best move isn't austerity — it's clearing the loan, which lands him at 100/100. |
+| 5 | **What happens if my salary drops 20%?** | An income shock, not a purchase. The best move isn't austerity   it's clearing the loan, which lands him at 100/100. |
 
 **Question 2 is the money shot.** It is the "Twin protects you" moment: the product refuses
 to endorse a high-risk route when a safe one exists.
@@ -92,7 +92,7 @@ message
    purchase_simulation  ·  financial_question  ·  chitchat
    ↓ extracts {item, price, recurring, financing_option, income_change_pct}
    ↓
-2. SIMULATION ENGINE  (pure Python — this is where every number comes from)
+2. SIMULATION ENGINE  (pure Python   this is where every number comes from)
    4 scenarios · 12-month projection each · risk · health score · alert
    ↓
 3. RAG RETRIEVAL  (LangChain + ChromaDB, top-3 with scores)
@@ -100,7 +100,7 @@ message
 4. ANSWER  (LLM, given the profile + passages + computed figures → falls back to templates)
 ```
 
-The response is structured JSON the frontend renders as components — never a markdown blob.
+The response is structured JSON the frontend renders as components   never a markdown blob.
 
 ---
 
@@ -141,7 +141,7 @@ A weighted sum, all four components computed in `simulation.health_score()`:
 | Debt-to-income | 20 | ≤ 5% (zero at ≥ 40%) |
 | Goal progress | 10 | primary goal funded from savings *above* the buffer |
 
-Saad scores **99** today. The interesting number is never the score — it's what a decision
+Saad scores **99** today. The interesting number is never the score   it's what a decision
 *does* to it. Financing a 220,000 SAR car takes him to **55**.
 
 ---
@@ -151,14 +151,14 @@ Saad scores **99** today. The interesting number is never the score — it's wha
 Toggle the language in the nav bar (**العربية / English**). The choice persists across
 reloads and defaults to the browser's language.
 
-The layout is not "translated" — it is **mirrored**. Setting `dir="rtl"` on `<html>` flips
+The layout is not "translated"   it is **mirrored**. Setting `dir="rtl"` on `<html>` flips
 the entire page, because the CSS is written with logical properties (`inset-inline`,
 `margin-inline`, `text-align: end`) rather than a parallel set of RTL overrides. The
 timeline chart mirrors too: time runs right-to-left and the value axis moves to the right
 edge.
 
-The part that matters most is deeper than the UI. **The simulation engine writes prose** —
-scenario names, the one-line verdicts, the alert messages, the timeline events — so all of
+The part that matters most is deeper than the UI. **The simulation engine writes prose**  
+scenario names, the one-line verdicts, the alert messages, the timeline events   so all of
 that is localised in Python (`backend/i18n.py`), not bolted on in React. The LLM is told
 which language to answer in; it is *not* asked to translate anything, because it never had
 the numbers in the first place.
@@ -171,7 +171,7 @@ The contract is narrow and enforced by tests:
 computed figure is identical while every user-visible string differs. Two details worth
 knowing:
 
-- **Latin digits are kept in Arabic** (`120,000 ريال`, not `١٢٠٬٠٠٠`). That is what Saudi
+- **Latin digits are kept in Arabic** (`120,000 ⃁`, not `١٢٠٬٠٠٠`). That is what Saudi
   banking apps do, and it keeps the figures checkable against the English view at a glance.
 - **The knowledge base stays English.** The local embedding model only speaks English, so an
   Arabic question is *searched* in English (the router emits an English `topic_en` for
@@ -180,7 +180,7 @@ knowing:
   in both languages.
 
 Arabic also works with **no Groq key at all**: the rule-based router understands Arabic
-prices ("120 ألف"), recurring costs ("300 ريال شهريًا") and salary shocks
+prices ("120 ألف"), recurring costs ("300 ⃁ شهريًا") and salary shocks
 ("انخفض راتبي بنسبة 20%"), and the template writer replies in Arabic.
 
 To add a third language: add its column to `STRINGS` in `backend/i18n.py`, add an
@@ -193,7 +193,7 @@ To add a third language: add its column to `STRINGS` in `backend/i18n.py`, add a
 
 ```
 backend/
-  app.py            Flask API — every route wrapped, never leaks a stack trace
+  app.py            Flask API   every route wrapped, never leaks a stack trace
   router.py         intent routing + answer generation (+ deterministic fallbacks)
   simulation.py     THE ENGINE. Pure Python, no I/O, fully unit-tested
   twin_profile.py   parses data/financial_twin.md
@@ -201,14 +201,14 @@ backend/
   ingest.py         one-time: knowledge/*.md → chunks → embeddings → Chroma
   llm.py            Groq client (REST, with retry on rate limits)
   config.py         every tunable constant in the financial model
-  demo_check.py     preflight — run the whole demo script from the CLI
+  demo_check.py     preflight   run the whole demo script from the CLI
   tests/            29 tests, all hand-verifiable
 frontend/
   src/pages/        Landing · Dashboard · Chat
   src/components/   ScenarioCard · TimelineChart · HealthGauge · AlertBanner · ChatMessage
-knowledge/          7 Markdown files — the RAG corpus (Saudi-specific)
+knowledge/          7 Markdown files   the RAG corpus (Saudi-specific)
 data/
-  financial_twin.md the user profile. Edit this to change the demo — no code changes.
+  financial_twin.md the user profile. Edit this to change the demo   no code changes.
 ```
 
 ---
@@ -219,8 +219,8 @@ data/
 
 | Variable | Required | Notes |
 |---|---|---|
-| `GROQ_API_KEY` | no* | Without it Twin runs in deterministic-fallback mode — all numbers identical, prose templated. |
-| `GROQ_MODEL` | no | Defaults to `llama-3.3-70b-versatile`. **Verify this id in the Groq console** — retired model names are the single likeliest thing to break on demo day. |
+| `GROQ_API_KEY` | no* | Without it Twin runs in deterministic-fallback mode   all numbers identical, prose templated. |
+| `GROQ_MODEL` | no | Defaults to `llama-3.3-70b-versatile`. **Verify this id in the Groq console**   retired model names are the single likeliest thing to break on demo day. |
 | `OPENAI_API_KEY` | no | If set, embeds with `text-embedding-3-small`. If not, uses the local MiniLM model. |
 
 Check what's actually live: **`GET /api/health`** reports the LLM mode, the embedding
@@ -228,9 +228,9 @@ backend, and whether the knowledge base has been ingested.
 
 ### Embeddings degrade in three tiers
 
-1. **OpenAI** `text-embedding-3-small` — if `OPENAI_API_KEY` is set
-2. **Local HuggingFace** `all-MiniLM-L6-v2` — no key needed (this is the default)
-3. **Built-in hashing embeddings** — pure Python, zero dependencies, always works
+1. **OpenAI** `text-embedding-3-small`   if `OPENAI_API_KEY` is set
+2. **Local HuggingFace** `all-MiniLM-L6-v2`   no key needed (this is the default)
+3. **Built-in hashing embeddings**   pure Python, zero dependencies, always works
 
 Tier 3 exists so that a missing model download can never kill the demo.
 
@@ -266,5 +266,5 @@ chart with no round trip.
 React (Vite) · Recharts · Flask · Groq (`llama-3.3-70b-versatile`) · LangChain · ChromaDB ·
 sentence-transformers
 
-All versions pinned in `requirements.txt` and `package.json` — LangChain's APIs move fast,
+All versions pinned in `requirements.txt` and `package.json`   LangChain's APIs move fast,
 and pinning is what stops a fresh `pip install` from breaking a working app.

@@ -60,7 +60,7 @@ def test_language_normalisation():
 
 def test_currency_keeps_latin_digits():
     assert i18n.sar(120_000, "en") == "120,000 SAR"
-    assert i18n.sar(120_000, "ar") == "120,000 ريال"
+    assert i18n.sar(120_000, "ar") == "120,000 ⃁"
 
 
 def test_missing_translation_falls_back_to_english():
@@ -103,7 +103,7 @@ def test_the_danger_alert_fires_in_arabic(profile):
     ar = simulate_purchase(profile, item="سيارة", price=220_000, lang="ar")
     assert ar.alert["level"] == "danger"
     assert "صندوق الطوارئ" in ar.alert["message"]
-    assert "30,000 ريال" in ar.alert["message"]
+    assert "30,000 ⃁" in ar.alert["message"]
 
     buy = next(s for s in ar.scenarios if s.key == "buy_now")
     assert buy.remaining_savings == 30_000
@@ -113,7 +113,7 @@ def test_the_danger_alert_fires_in_arabic(profile):
 
 
 def test_arabic_item_matches_an_english_goal(profile):
-    """'سيارة' has to satisfy the profile's 'Buy a car' goal, via its Arabic label —
+    """'سيارة' has to satisfy the profile's 'Buy a car' goal, via its Arabic label  
     otherwise the goal-delay maths would silently differ between languages."""
     en = simulate_purchase(profile, item="car", price=220_000, lang="en")
     ar = simulate_purchase(profile, item="سيارة", price=220_000, lang="ar")
@@ -172,7 +172,7 @@ def test_baseline_timeline_localises_months_not_money(profile):
 
 def test_arabic_rule_based_routing():
     """With no Groq key, Arabic must still route and extract correctly."""
-    car = classify_fallback("ماذا لو اشتريت سيارة بـ 120,000 ريال؟", [])
+    car = classify_fallback("ماذا لو اشتريت سيارة بـ 120,000 ⃁؟", [])
     assert car["intent"] == "purchase_simulation"
     assert car["price"] == 120_000
     assert car["item"] == "سيارة"
@@ -182,7 +182,7 @@ def test_arabic_rule_based_routing():
     thousands = classify_fallback("أريد شراء سيارة بـ 120 ألف", [])
     assert thousands["price"] == 120_000
 
-    sub = classify_fallback("هل أقدر على اشتراك بـ 300 ريال شهريًا؟", [])
+    sub = classify_fallback("هل أقدر على اشتراك بـ 300 ⃁ شهريًا؟", [])
     assert sub["intent"] == "purchase_simulation"
     assert sub["price"] == 300
     assert sub["recurring"] is True
@@ -203,7 +203,7 @@ def test_arabic_rule_based_routing():
 
 
 def test_arabic_followup_resolves_from_history():
-    history = [{"role": "user", "content": "ماذا لو اشتريت سيارة بـ 120,000 ريال؟"}]
+    history = [{"role": "user", "content": "ماذا لو اشتريت سيارة بـ 120,000 ⃁؟"}]
     wait = classify_fallback("وماذا لو انتظرت ستة أشهر؟", history)
     assert wait["intent"] == "purchase_simulation"
     assert wait["price"] == 120_000

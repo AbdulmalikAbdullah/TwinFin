@@ -1,13 +1,13 @@
 """Localization for everything the engine says out loud.
 
-Twin's simulation engine does not only compute numbers — it also writes the scenario
+Twin's simulation engine does not only compute numbers   it also writes the scenario
 names, the one-line verdicts, the alert messages and the timeline events. All of that is
 deterministic prose, so all of it has to be translated here rather than left to the LLM.
 
 Two rules:
 
-  1. **Numbers never change.** Only their wrapper does: `120,000 SAR` / `120,000 ريال`.
-     Latin digits are kept in Arabic — that is what Saudi banking apps do, and it keeps
+  1. **Numbers never change.** Only their wrapper does: `120,000 SAR` / `120,000 ⃁`.
+     Latin digits are kept in Arabic   that is what Saudi banking apps do, and it keeps
      the figures verifiable against the English output at a glance.
   2. **Scenario identity is never translated.** Every scenario carries a stable `key`
      ("buy_now", "finance", …) that the ranking logic uses. `name` is display only.
@@ -38,7 +38,7 @@ def is_rtl(lang: str) -> bool:
 
 # -- Numbers and dates ------------------------------------------------------------------
 
-CURRENCY = {"en": "{amount} SAR", "ar": "{amount} ريال"}
+CURRENCY = {"en": "{amount} SAR", "ar": "{amount} ⃁"}
 
 MONTHS = {
     "en": ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -49,7 +49,7 @@ MONTHS = {
 
 
 def sar(amount: float, lang: str = DEFAULT_LANG) -> str:
-    """Format a riyal amount. Latin digits in both languages — see the module docstring."""
+    """Format a riyal amount. Latin digits in both languages   see the module docstring."""
     return CURRENCY[normalize(lang)].format(amount=f"{amount:,.0f}")
 
 
@@ -91,7 +91,7 @@ STRINGS: dict[str, dict[str, str]] = {
     "item.fallback": {"en": "the purchase", "ar": "هذا الشراء"},
     "item.subscription": {"en": "subscription", "ar": "اشتراك"},
 
-    # --- scenario names (display only — logic uses the stable `key`) ---
+    # --- scenario names (display only   logic uses the stable `key`) ---
     "scenario.buy_now": {"en": "Buy Now", "ar": "اشترِ الآن"},
     "scenario.wait": {"en": "Wait {months} Months", "ar": "انتظر {months} أشهر"},
     "scenario.finance": {"en": "Finance (Murabaha)", "ar": "تمويل (مرابحة)"},
@@ -114,28 +114,28 @@ STRINGS: dict[str, dict[str, str]] = {
         "ar": "ادّخر {surplus} شهريًا لمدة {months} أشهر (+{added})، ثم ادفع نقدًا.",
     },
     "detail.finance": {
-        "en": "{monthly}/month for {term} months. Total {total} — a {profit} profit "
+        "en": "{monthly}/month for {term} months. Total {total}   a {profit} profit "
               "markup. A conventional loan at {apr}% APR would total {conv_total}.",
-        "ar": "{monthly} شهريًا لمدة {term} شهرًا. الإجمالي {total} — بهامش ربح {profit}. "
+        "ar": "{monthly} شهريًا لمدة {term} شهرًا. الإجمالي {total}   بهامش ربح {profit}. "
               "القرض التقليدي بفائدة سنوية {apr}% سيبلغ إجماليه {conv_total}.",
     },
     "detail.cheaper": {
-        "en": "A {price} option instead ({ratio}% of the price) — saves {saved}.",
-        "ar": "خيار بـ{price} بدلًا من ذلك ({ratio}% من السعر) — يوفّر {saved}.",
+        "en": "A {price} option instead ({ratio}% of the price)   saves {saved}.",
+        "ar": "خيار بـ{price} بدلًا من ذلك ({ratio}% من السعر)   يوفّر {saved}.",
     },
     "detail.subscribe_now": {
-        "en": "{monthly}/month — {annual} a year, and {pct}% of your monthly surplus.",
-        "ar": "{monthly} شهريًا — {annual} سنويًا، أي {pct}% من فائضك الشهري.",
+        "en": "{monthly}/month   {annual} a year, and {pct}% of your monthly surplus.",
+        "ar": "{monthly} شهريًا   {annual} سنويًا، أي {pct}% من فائضك الشهري.",
     },
     "detail.pay_annually": {
-        "en": "{prepay} up front instead of {annual} monthly — the usual two-months-free "
+        "en": "{prepay} up front instead of {annual} monthly   the usual two-months-free "
               "discount saves {saved} a year.",
-        "ar": "{prepay} مقدمًا بدلًا من {annual} شهريًا — خصم الشهرين المجانيين المعتاد "
+        "ar": "{prepay} مقدمًا بدلًا من {annual} شهريًا   خصم الشهرين المجانيين المعتاد "
               "يوفّر {saved} سنويًا.",
     },
     "detail.cheaper_tier": {
-        "en": "A {monthly}/month plan instead — {saved} a year back in your pocket.",
-        "ar": "باقة بـ{monthly} شهريًا بدلًا من ذلك — {saved} سنويًا تعود إلى جيبك.",
+        "en": "A {monthly}/month plan instead   {saved} a year back in your pocket.",
+        "ar": "باقة بـ{monthly} شهريًا بدلًا من ذلك   {saved} سنويًا تعود إلى جيبك.",
     },
     "detail.skip": {
         "en": "Save the {monthly}/month instead: {annual} more in the bank a year from now.",
@@ -160,12 +160,12 @@ STRINGS: dict[str, dict[str, str]] = {
 
     # --- one-line verdicts ---
     "rec.breaks_ef": {
-        "en": "Breaks your emergency fund — leaves {savings} against a {target} floor.",
-        "ar": "يكسر صندوق الطوارئ — يترك {savings} مقابل حدٍّ أدنى قدره {target}.",
+        "en": "Breaks your emergency fund   leaves {savings} against a {target} floor.",
+        "ar": "يكسر صندوق الطوارئ   يترك {savings} مقابل حدٍّ أدنى قدره {target}.",
     },
     "rec.high": {
-        "en": "Cash flow falls to {cash}/month — too thin against a {salary} salary.",
-        "ar": "التدفق النقدي ينخفض إلى {cash} شهريًا — ضئيل جدًا مقابل راتب {salary}.",
+        "en": "Cash flow falls to {cash}/month   too thin against a {salary} salary.",
+        "ar": "التدفق النقدي ينخفض إلى {cash} شهريًا   ضئيل جدًا مقابل راتب {salary}.",
     },
     "rec.medium": {
         "en": "Workable, but the margin narrows: {cash}/month spare and {cover} months "
@@ -173,9 +173,9 @@ STRINGS: dict[str, dict[str, str]] = {
         "ar": "ممكن، لكن الهامش يضيق: {cash} شهريًا متاحة و{cover} أشهر تغطية.",
     },
     "rec.low": {
-        "en": "Comfortable — keeps {cover} months of expenses in reserve and {cash}/month "
+        "en": "Comfortable   keeps {cover} months of expenses in reserve and {cash}/month "
               "spare.",
-        "ar": "مريح — يبقي {cover} أشهر من المصروفات احتياطيًا و{cash} شهريًا متاحة.",
+        "ar": "مريح   يبقي {cover} أشهر من المصروفات احتياطيًا و{cash} شهريًا متاحة.",
     },
 
     # --- alerts ---
@@ -184,10 +184,10 @@ STRINGS: dict[str, dict[str, str]] = {
         "ar": "لا يمكنك دفع تكلفة {subject} نقدًا. التكلفة {cost} بينما لديك {savings}.",
     },
     "alert.breaks_ef": {
-        "en": "{subject} would leave you with {savings} — below your {target} emergency "
+        "en": "{subject} would leave you with {savings}   below your {target} emergency "
               "fund ({ef_months} months of expenses).{breach} That is {cover} months of "
               "cover instead of {ef_months}.",
-        "ar": "{subject} سيترك لديك {savings} — أقل من صندوق الطوارئ البالغ {target} "
+        "ar": "{subject} سيترك لديك {savings}   أقل من صندوق الطوارئ البالغ {target} "
               "({ef_months} أشهر من المصروفات).{breach} أي {cover} أشهر تغطية بدلًا من "
               "{ef_months}.",
     },
@@ -196,9 +196,9 @@ STRINGS: dict[str, dict[str, str]] = {
         "ar": " تنخفض مدخراتك تحت الحد في {month}.",
     },
     "alert.thin_cash": {
-        "en": "{subject} would cut your monthly cash flow to {cash} — under 10% of your "
+        "en": "{subject} would cut your monthly cash flow to {cash}   under 10% of your "
               "salary. One unexpected bill and you would be borrowing.",
-        "ar": "{subject} سيقلّص تدفقك النقدي الشهري إلى {cash} — أقل من 10% من راتبك. "
+        "ar": "{subject} سيقلّص تدفقك النقدي الشهري إلى {cash}   أقل من 10% من راتبك. "
               "فاتورة واحدة غير متوقعة وستضطر للاقتراض.",
     },
     "alert.medium": {
@@ -221,34 +221,34 @@ STRINGS: dict[str, dict[str, str]] = {
     },
 
     # --- timeline events ---
-    "event.bought": {"en": "Bought {item} — {amount}", "ar": "شراء {item} — {amount}"},
+    "event.bought": {"en": "Bought {item}   {amount}", "ar": "شراء {item}   {amount}"},
     "event.bought_cheaper": {
-        "en": "Bought a cheaper {item} — {amount}",
-        "ar": "شراء {item} أرخص — {amount}",
+        "en": "Bought a cheaper {item}   {amount}",
+        "ar": "شراء {item} أرخص   {amount}",
     },
     "event.annual_plan": {
-        "en": "Annual plan for {item} — {amount}",
-        "ar": "اشتراك سنوي في {item} — {amount}",
+        "en": "Annual plan for {item}   {amount}",
+        "ar": "اشتراك سنوي في {item}   {amount}",
     },
     "event.subscribed": {
-        "en": "Subscribed to {item} — {amount}/month",
-        "ar": "الاشتراك في {item} — {amount} شهريًا",
+        "en": "Subscribed to {item}   {amount}/month",
+        "ar": "الاشتراك في {item}   {amount} شهريًا",
     },
     "event.financed": {
-        "en": "Financed {item} — {amount}/month for {term} months",
-        "ar": "تمويل {item} — {amount} شهريًا لمدة {term} شهرًا",
+        "en": "Financed {item}   {amount}/month for {term} months",
+        "ar": "تمويل {item}   {amount} شهريًا لمدة {term} شهرًا",
     },
     "event.loan_cleared": {
-        "en": "{name} cleared — {amount}/month freed up",
-        "ar": "تم سداد {name} — تحرير {amount} شهريًا",
+        "en": "{name} cleared   {amount}/month freed up",
+        "ar": "تم سداد {name}   تحرير {amount} شهريًا",
     },
     "event.financing_done": {
-        "en": "Financing complete — {amount}/month freed up",
-        "ar": "انتهى التمويل — تحرير {amount} شهريًا",
+        "en": "Financing complete   {amount}/month freed up",
+        "ar": "انتهى التمويل   تحرير {amount} شهريًا",
     },
     "event.loan_settled": {
-        "en": "Loan settled — {amount} paid, {monthly}/month freed",
-        "ar": "تم سداد القرض — دُفع {amount}، وتحرّر {monthly} شهريًا",
+        "en": "Loan settled   {amount} paid, {monthly}/month freed",
+        "ar": "تم سداد القرض   دُفع {amount}، وتحرّر {monthly} شهريًا",
     },
     "event.salary_change": {
         "en": "Salary changes to {amount}/month",
@@ -269,8 +269,8 @@ STRINGS: dict[str, dict[str, str]] = {
         "ar": "لا تزال تحت صندوق الطوارئ",
     },
     "warn.exhausted": {
-        "en": "Savings exhausted — you would need to borrow",
-        "ar": "نفدت المدخرات — ستضطر للاقتراض",
+        "en": "Savings exhausted   you would need to borrow",
+        "ar": "نفدت المدخرات   ستضطر للاقتراض",
     },
 
     # --- subjects (what is being simulated) ---
@@ -304,18 +304,18 @@ STRINGS: dict[str, dict[str, str]] = {
     # --- template answers (used when the LLM is unavailable) ---
     "tpl.careful": {"en": "**Careful.**", "ar": "**انتبه.**"},
     "tpl.proceed": {"en": "**Proceed carefully.**", "ar": "**تقدّم بحذر.**"},
-    "tpl.works": {"en": "**Yes — this works.**", "ar": "**نعم — هذا ممكن.**"},
+    "tpl.works": {"en": "**Yes   this works.**", "ar": "**نعم   هذا ممكن.**"},
     "tpl.recommend": {
         "en": "My recommendation is **{name}**: {detail} That leaves you **{savings}** in "
-              "savings and **{cash}/month** of breathing room — {cover} months of expenses "
+              "savings and **{cash}/month** of breathing room   {cover} months of expenses "
               "covered, against your {target} emergency-fund target. Risk: **{risk}**.",
         "ar": "توصيتي هي **{name}**: {detail} هذا يترك لديك **{savings}** مدخرات "
-              "و**{cash} شهريًا** من الأريحية — تغطية {cover} أشهر من المصروفات، مقابل هدف "
+              "و**{cash} شهريًا** من الأريحية   تغطية {cover} أشهر من المصروفات، مقابل هدف "
               "صندوق الطوارئ البالغ {target}. المخاطرة: **{risk}**.",
     },
     "tpl.worth_knowing": {
-        "en": "Worth knowing: **{name}** is the {risk}-risk route — {recommendation}",
-        "ar": "جدير بالمعرفة: **{name}** هو المسار ذو المخاطرة {risk} — {recommendation}",
+        "en": "Worth knowing: **{name}** is the {risk}-risk route   {recommendation}",
+        "ar": "جدير بالمعرفة: **{name}** هو المسار ذو المخاطرة {risk}   {recommendation}",
     },
     "tpl.goal_delay": {
         "en": "This pushes your goals back by about **{months} months**.",
@@ -331,20 +331,20 @@ STRINGS: dict[str, dict[str, str]] = {
     "tpl.no_llm": {
         "en": "I can’t reach my language model right now, but your Twin is still here. You "
               "have **{savings}** saved, **{surplus}/month** spare, and an emergency-fund "
-              "target of **{target}**. Ask me about a specific purchase — for example "
-              "*“what if I buy a car for 120,000 SAR?”* — and I can simulate it exactly.",
+              "target of **{target}**. Ask me about a specific purchase   for example "
+              "*“what if I buy a car for 120,000 SAR?”*   and I can simulate it exactly.",
         "ar": "لا أستطيع الوصول إلى نموذجي اللغوي حاليًا، لكن توأمك المالي لا يزال هنا. "
               "لديك **{savings}** مدخرات، و**{surplus} شهريًا** متاحة، وهدف صندوق طوارئ "
-              "قدره **{target}**. اسألني عن عملية شراء محددة — مثلًا *«ماذا لو اشتريت "
-              "سيارة بـ120,000 ريال؟»* — وسأحاكيها بدقة.",
+              "قدره **{target}**. اسألني عن عملية شراء محددة   مثلًا *«ماذا لو اشتريت "
+              "سيارة بـ120,000 ⃁؟»*   وسأحاكيها بدقة.",
     },
     "tpl.chitchat": {
-        "en": "Hello {name} — I’m your Financial Twin. Ask me about a purchase before you "
+        "en": "Hello {name}   I’m your Financial Twin. Ask me about a purchase before you "
               "make it and I’ll show you exactly what it does to your savings, your cash "
               "flow, and your goals. Try *“what if I buy a car for 120,000 SAR?”*",
-        "ar": "أهلًا {name} — أنا توأمك المالي. اسألني عن أي عملية شراء قبل أن تقوم بها "
+        "ar": "أهلًا {name}   أنا توأمك المالي. اسألني عن أي عملية شراء قبل أن تقوم بها "
               "وسأريك بالضبط أثرها على مدخراتك وتدفقك النقدي وأهدافك. جرّب *«ماذا لو "
-              "اشتريت سيارة بـ120,000 ريال؟»*",
+              "اشتريت سيارة بـ120,000 ⃁؟»*",
     },
 
     # --- risk words, for the template writer ---
@@ -358,17 +358,17 @@ STRINGS: dict[str, dict[str, str]] = {
         "ar": "اكتب شيئًا وسأحسب الأرقام.",
     },
     "err.too_long": {
-        "en": "That message is too long — try asking in a sentence or two.",
-        "ar": "الرسالة طويلة جدًا — حاول السؤال في جملة أو جملتين.",
+        "en": "That message is too long   try asking in a sentence or two.",
+        "ar": "الرسالة طويلة جدًا   حاول السؤال في جملة أو جملتين.",
     },
     "err.generic": {
-        "en": "Something went wrong on my side. Your data is safe — try asking again.",
-        "ar": "حدث خطأ من جانبي. بياناتك بأمان — حاول السؤال مرة أخرى.",
+        "en": "Something went wrong on my side. Your data is safe   try asking again.",
+        "ar": "حدث خطأ من جانبي. بياناتك بأمان   حاول السؤال مرة أخرى.",
     },
     "err.chat": {
-        "en": "I couldn’t finish that one. My simulation engine is fine — it’s my language "
+        "en": "I couldn’t finish that one. My simulation engine is fine   it’s my language "
               "model that stumbled. Try rephrasing, or ask about a specific purchase.",
-        "ar": "لم أتمكن من إكمال ذلك. محرك المحاكاة يعمل جيدًا — النموذج اللغوي هو من تعثّر. "
+        "ar": "لم أتمكن من إكمال ذلك. محرك المحاكاة يعمل جيدًا   النموذج اللغوي هو من تعثّر. "
               "حاول إعادة الصياغة، أو اسأل عن عملية شراء محددة.",
     },
     "err.profile": {

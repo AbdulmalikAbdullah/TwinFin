@@ -403,7 +403,7 @@ def test_salary_drop_20_percent(profile):
 
     # For an income shock there is no "thing the user asked for", so the ranking falls
     # through to the health score. The Twin should recommend the genuinely best move
-    # rather than defaulting to inertia — clearing the loan lands him at 100/100.
+    # rather than defaulting to inertia   clearing the loan lands him at 100/100.
     assert clear.recommended is True
     assert clear.health_score == 100.0
 

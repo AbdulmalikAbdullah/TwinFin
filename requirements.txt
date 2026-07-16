@@ -1,4 +1,4 @@
-# Twin — backend dependencies.
+# Twin   backend dependencies.
 # Versions are pinned exactly. LangChain's APIs move fast; pinning is what stops a
 # `pip install` on the morning of the demo from breaking a working app.
 #
@@ -21,7 +21,7 @@ langchain-text-splitters==1.1.2
 # --- Embeddings ------------------------------------------------------------------------
 # Tier 1: OpenAI text-embedding-3-small, used only if OPENAI_API_KEY is set.
 langchain-openai==1.3.5
-# Tier 2: local sentence-transformers/all-MiniLM-L6-v2 — no API key needed.
+# Tier 2: local sentence-transformers/all-MiniLM-L6-v2   no API key needed.
 # This is the heavy one (it pulls torch, ~250 MB). If you want a lean install you can
 # drop these two lines: Twin falls back to its built-in hashing embeddings and still
 # runs, ingests, and retrieves. See backend/rag.py.

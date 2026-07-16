@@ -39,7 +39,7 @@ export default function ChatMessage({ message, emergencyFloor }) {
   const scenarios = message.scenarios ?? []
   const recommended = scenarios.find((s) => s.recommended) ?? scenarios[0]
   const [pickedKey, setPickedKey] = useState(null)
-  // Track the *key*, never the name — the name is a translated display string.
+  // Track the *key*, never the name   the name is a translated display string.
   const active = scenarios.find((s) => s.key === pickedKey) ?? recommended
 
   if (isUser) {
@@ -146,7 +146,7 @@ export default function ChatMessage({ message, emergencyFloor }) {
             )}
 
             {/* Source filenames are intentionally not shown to the user. The RAG passages
-                still ground the answer on the backend — they are just not surfaced here. */}
+                still ground the answer on the backend   they are just not surfaced here. */}
           </>
         )}
       </div>

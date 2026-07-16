@@ -21,7 +21,7 @@ Everything below is built on four figures. If you cannot recite them, you do not
 A useful way to hold all four in one place is a single 0–100 score built from weighted
 components: savings rate (how much of your income survives the month), emergency fund coverage
 (how many months of expenses you hold in cash), debt-to-income (lower is better), and progress
-toward your named goals. No single component tells the truth on its own — a high salary with a
+toward your named goals. No single component tells the truth on its own   a high salary with a
 thin buffer and heavy financing is a fragile position, and the score is designed to make that
 fragility visible in one number.
 
@@ -53,6 +53,6 @@ Then apply one test before every large decision:
 > named goals on schedule?
 
 Three yeses and it is a decision you can make quickly. Any no, and the honest answer is not
-"never" — it is **"not like this."** Wait and save, buy a cheaper version, or finance it with
+"never"   it is **"not like this."** Wait and save, buy a cheaper version, or finance it with
 your eyes open and accept the cost. What separates people who build wealth from people who
 merely earn well is that they run this test *before* they sign, not after.

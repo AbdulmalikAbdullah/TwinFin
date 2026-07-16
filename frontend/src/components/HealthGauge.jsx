@@ -5,7 +5,7 @@ import { useLang } from '../lib/i18n'
  * Animated Financial Health Score gauge (0–100).
  *
  * The score, its band label and its four component names are all computed and localised in
- * Python — this only draws them. The arc animates from 0 on mount so the number lands
+ * Python   this only draws them. The arc animates from 0 on mount so the number lands
  * rather than just appearing, and the stroke colour tracks the band.
  */
 
@@ -71,7 +71,7 @@ export default function HealthGauge({ health }) {
             strokeDashoffset={offset}
           />
         </svg>
-        {/* "85/100" is a numeric expression — keep it LTR in either direction. */}
+        {/* "85/100" is a numeric expression   keep it LTR in either direction. */}
         <bdi className="gauge-num num">
           {Math.round(shown)}
           <span>/100</span>

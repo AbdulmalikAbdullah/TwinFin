@@ -17,7 +17,7 @@ in fixed monthly installments. There is no interest; there is a **profit rate** 
 front, and the total price is fixed on day one. Because the amount owed cannot grow, murabaha
 is predictable.
 
-Typical Saudi market terms (SAMA-regulated banks — Al Rajhi, Alinma, Riyad Bank, SNB and
+Typical Saudi market terms (SAMA-regulated banks   Al Rajhi, Alinma, Riyad Bank, SNB and
 others):
 
 - **Flat profit rate:** roughly 4%–6% per year of the original amount.
@@ -25,7 +25,7 @@ others):
 - **Down payment:** often 0%–20%; a larger down payment lowers the financed base.
 - **Administrative fee:** capped by SAMA at 1% of the finance amount or 5,000 SAR, whichever
   is lower.
-- **Early settlement:** SAMA rules entitle you to a rebate — you may not be charged the profit
+- **Early settlement:** SAMA rules entitle you to a rebate   you may not be charged the profit
   on the remaining tenor beyond a limited window. Always ask for the early-settlement quote in
   writing.
 
@@ -38,7 +38,7 @@ others):
 You keep your 120,000 SAR of savings, but you commit 3,500 SAR of every future month's cash
 flow for three years, and you pay 6,000 SAR for the privilege.
 
-**Read the quote carefully — "flat" is ambiguous and the difference is enormous.** A 5% markup
+**Read the quote carefully   "flat" is ambiguous and the difference is enormous.** A 5% markup
 applied *once over the whole term* costs 6,000 SAR. A 5% flat rate charged *per year* costs
 5% x 3 years = 18,000 SAR on the same car. The only number worth comparing between offers is
 the **total repayable**. Ask for it in writing, and divide by the tenor yourself.
@@ -55,7 +55,7 @@ a 3% *effective* APR, so it can genuinely be cheaper than a conventional loan ad
     monthly payment  ~ 3,623 SAR
     total repayable  ~ 130,442 SAR
 
-Against the murabaha's 126,000 SAR, the Islamic product is the cheaper one here — but that is a
+Against the murabaha's 126,000 SAR, the Islamic product is the cheaper one here   but that is a
 property of these particular numbers, not a law. Run both totals every time. Conventional loans
 may also be settled early with a rebate under SAMA rules, but they carry riba, which most
 customers in the Kingdom choose to avoid on religious grounds.
@@ -64,9 +64,9 @@ customers in the Kingdom choose to avoid on religious grounds.
 
 Compare the three options on the numbers, not the feeling:
 
-1. **Cash** — cheapest, but only if the emergency fund survives it.
-2. **Murabaha** — protects liquidity, costs a known markup, and eats monthly cash flow.
-3. **Wait and save** — costs you nothing but time, and time is often the cheapest currency you
+1. **Cash**   cheapest, but only if the emergency fund survives it.
+2. **Murabaha**   protects liquidity, costs a known markup, and eats monthly cash flow.
+3. **Wait and save**   costs you nothing but time, and time is often the cheapest currency you
    have.
 
 If financing takes your monthly surplus below about 10% of salary, the car is too expensive

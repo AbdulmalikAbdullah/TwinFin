@@ -16,7 +16,7 @@ import { CHART, sar, sarShort } from '../lib/format'
  * The 12-month projection.
  *
  * Savings is the story, so it gets the filled area; income and expenses are thin
- * reference lines behind it. The emergency-fund floor is drawn as a red dashed line —
+ * reference lines behind it. The emergency-fund floor is drawn as a red dashed line  
  * the whole product is about whether the savings curve stays above it, so it has to be
  * visible at a glance.
  *

@@ -30,7 +30,7 @@ from twin_profile import load_profile  # noqa: E402
 
 CAR_QUESTION = "What if I buy a car for 120,000 SAR?"
 
-# Each entry is (question, history). "What if I wait six months?" is a follow-up — it only
+# Each entry is (question, history). "What if I wait six months?" is a follow-up   it only
 # means anything after the car has been discussed, so it gets that context, exactly as it
 # would in the live demo.
 DEMO_QUESTIONS: list[tuple[str, list[dict[str, str]]]] = [
@@ -52,13 +52,13 @@ def main() -> None:
 
     print()
     print("=" * 78)
-    print("  TWIN — PREFLIGHT")
+    print("  TWIN   PREFLIGHT")
     print("=" * 78)
     print(f"  Twin        : {profile.name}, {profile.age}, {profile.city}")
     print(f"  Savings     : {profile.savings:,.0f} SAR")
     print(f"  Surplus     : {profile.monthly_surplus:,.0f} SAR/month")
     print(f"  EF target   : {profile.emergency_fund_target:,.0f} SAR")
-    print(f"  LLM         : {'Groq — ' + str(llm.is_configured()) if llm.is_configured() else 'NOT CONFIGURED (deterministic fallback — numbers still correct)'}")
+    print(f"  LLM         : {'Groq   ' + str(llm.is_configured()) if llm.is_configured() else 'NOT CONFIGURED (deterministic fallback   numbers still correct)'}")
     print(f"  Embeddings  : {embed_backend}")
     print(f"  Ingested    : {rag.is_ingested()}")
     print("=" * 78)

@@ -1,4 +1,4 @@
-# Secrets — never commit these.
+# Secrets   never commit these.
 .env
 .env.local
 
@@ -9,7 +9,7 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 
-# The persisted vector store is a build artefact — regenerate it with:
+# The persisted vector store is a build artefact   regenerate it with:
 #   python backend/ingest.py
 backend/chroma_db/
 

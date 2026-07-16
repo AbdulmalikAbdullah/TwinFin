@@ -3,7 +3,7 @@ import { useLang } from '../lib/i18n'
 /**
  * The "Twin protects you" moment.
  *
- * DANGER is loud and pulses — it means the purchase breaks the emergency fund or guts
+ * DANGER is loud and pulses   it means the purchase breaks the emergency fund or guts
  * cash flow. INFO is calm and green: an explicit all-clear, so the user always gets a
  * verdict rather than silence. The message itself is written (and localised) by the
  * engine; only the heading lives in the UI.

@@ -3,10 +3,10 @@ import { sar } from '../lib/format'
 
 /**
  * One scenario, colour-coded by risk. Clicking it swaps the timeline chart below to that
- * scenario's projection — the comparison is the product, so it has to be one click.
+ * scenario's projection   the comparison is the product, so it has to be one click.
  *
  * Every figure here comes from simulation.py, and so do `name`, `detail` and
- * `recommendation` — already in the right language. We never branch on `name`; the
+ * `recommendation`   already in the right language. We never branch on `name`; the
  * scenario's stable `key` is what identifies it.
  */
 export default function ScenarioCard({ scenario, selected, onSelect, index }) {

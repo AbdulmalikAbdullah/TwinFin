@@ -17,7 +17,7 @@ function initialLang() {
     const saved = localStorage.getItem(STORAGE_KEY)
     if (saved && LANGS.includes(saved)) return saved
   } catch {
-    // Private mode / storage disabled — fall through to the browser's preference.
+    // Private mode / storage disabled   fall through to the browser's preference.
   }
   const browser = (navigator.language || 'en').slice(0, 2)
   return LANGS.includes(browser) ? browser : 'en'

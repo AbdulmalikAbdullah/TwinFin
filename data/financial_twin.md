@@ -1,8 +1,8 @@
-# Financial Twin — Saad
+# Financial Twin   Saad
 
 This file is the single source of truth for the user's financial profile.
 It is parsed at backend startup by `backend/profile.py`. Edit the values here to
-change the demo — no code changes required.
+change the demo   no code changes required.
 
 ```yaml
 name: Saad
@@ -43,7 +43,7 @@ ar_labels:
 
 ## Notes
 
-- `ar_labels` holds Arabic display names only. **No numbers live there** — every figure has
+- `ar_labels` holds Arabic display names only. **No numbers live there**   every figure has
   exactly one source of truth, above. To add another language, add another `xx_labels` block
   and register it in `backend/i18n.py`.
 - `savings` is liquid cash. The investment account is tracked under `assets` and is

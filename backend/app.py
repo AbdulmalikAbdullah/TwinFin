@@ -1,4 +1,4 @@
-"""Twin — Flask API.
+"""Twin   Flask API.
 
 Every endpoint is wrapped so that a failure anywhere (Groq down, embeddings missing, a
 malformed request) returns a friendly JSON payload the UI can render as a message. The
@@ -45,7 +45,7 @@ log.info(
 def req_lang() -> str:
     """The language for this request: ?lang=ar, a JSON `lang` field, or Accept-Language.
 
-    Anything unrecognised falls back to English rather than erroring — a bad language code
+    Anything unrecognised falls back to English rather than erroring   a bad language code
     should never cost the user their answer.
     """
     candidate = request.args.get("lang")
@@ -183,7 +183,7 @@ if __name__ == "__main__":
         log.warning("")
     if not llm.is_configured():
         log.warning("")
-        log.warning("  No GROQ_API_KEY found — running in deterministic fallback mode.")
+        log.warning("  No GROQ_API_KEY found   running in deterministic fallback mode.")
         log.warning("  Every number is still correct; the prose is templated, not written.")
         log.warning("  Add your key to .env to enable the language model.")
         log.warning("")

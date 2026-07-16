@@ -1,4 +1,4 @@
-# Twin — AI Financial Twin (Hackathon MVP Build Prompt)
+# Twin   AI Financial Twin (Hackathon MVP Build Prompt)
 
 You are a senior AI engineer, full-stack developer, and UI/UX designer. Build a complete, runnable MVP web application called **Twin**. This is for a hackathon: the app must run locally with minimal setup, never crash during a live demo, and look premium. Prioritize a polished demo path over feature breadth.
 
@@ -25,7 +25,7 @@ Twin combines:
    - `chitchat` → answer directly, briefly, no RAG.
 3. **Grounded answers.** For the two financial intents, the final answer must combine: (a) retrieved knowledge-base passages, (b) the Financial Twin profile, (c) simulation results when applicable. (d) time line for the purchase item using diagram such as line graph and with the help of recharts.github.io to make Animated Time Series. 
 
-4. **Structured API responses.** The backend returns JSON the frontend can render as components (schema below) — never markdown-only blobs.
+4. **Structured API responses.** The backend returns JSON the frontend can render as components (schema below)   never markdown-only blobs.
 
 ---
 
@@ -37,7 +37,7 @@ Twin combines:
 **RAG:** LangChain + ChromaDB (persistent local store).
 **Embeddings:** OpenAI embeddings (`text-embedding-3-small`) if `OPENAI_API_KEY` is set; **automatic fallback** to local HuggingFace `sentence-transformers/all-MiniLM-L6-v2` if not. The app must work with only a Groq key.
 **Config:** `.env` file loaded with python-dotenv. Provide `.env.example`.
-**Dependencies:** Pin exact versions in `requirements.txt` and `package.json` (LangChain APIs change often — pinning prevents day-of-demo breakage).
+**Dependencies:** Pin exact versions in `requirements.txt` and `package.json` (LangChain APIs change often   pinning prevents day-of-demo breakage).
 
 ---
 
@@ -81,10 +81,10 @@ risk_tolerance: moderate
 
 Pure Python, fully deterministic, unit-testable. For a purchase of price `P`, generate these scenarios:
 
-1. **Buy Now** — pay cash from savings.
-2. **Wait 6 Months** — keep saving monthly surplus, then buy.
-3. **Finance** — model a simple murabaha-style installment (e.g., 5% flat profit rate, 36 months — constants in config); show both the Islamic financing option and note the conventional equivalent.
-4. **Cheaper Alternative** — 65% of the asked price.
+1. **Buy Now**   pay cash from savings.
+2. **Wait 6 Months**   keep saving monthly surplus, then buy.
+3. **Finance**   model a simple murabaha-style installment (e.g., 5% flat profit rate, 36 months   constants in config); show both the Islamic financing option and note the conventional equivalent.
+4. **Cheaper Alternative**   65% of the asked price.
 
 For each scenario compute:
 - Remaining savings after purchase
@@ -94,15 +94,15 @@ For each scenario compute:
 - Estimated delay to the user's primary goal (months)
 - One-line rule-based recommendation string
 
-Also generate a **12-month timeline projection** (per scenario or for the recommended scenario): month, income, expenses, savings balance, warnings (e.g., "Savings dip below emergency fund in March"), events (e.g., "Loan ends in month 18 — excluded; car purchased in month 6").
+Also generate a **12-month timeline projection** (per scenario or for the recommended scenario): month, income, expenses, savings balance, warnings (e.g., "Savings dip below emergency fund in March"), events (e.g., "Loan ends in month 18   excluded; car purchased in month 6").
 
-**Proactive Alerts:** if any requested purchase would push savings below the emergency fund target or make cash flow negative, the API response includes an `alert` object; the UI renders it as a prominent warning banner. This is the "Twin protects you" moment — make it visually striking.
+**Proactive Alerts:** if any requested purchase would push savings below the emergency fund target or make cash flow negative, the API response includes an `alert` object; the UI renders it as a prominent warning banner. This is the "Twin protects you" moment   make it visually striking.
 
 ---
 
 ## RAG Pipeline
 
-- `knowledge/` folder with 7 Markdown files, each 300–500 words of practical advice with Saudi-specific context: `budgeting.md`, `emergency_fund.md`, `car_financing.md` (include murabaha vs. conventional loans, typical Saudi bank terms), `zakat.md` (2.5% on eligible savings — mention how a large purchase affects zakat base), `islamic_finance.md`, `saving_strategies.md`, `financial_planning.md`.
+- `knowledge/` folder with 7 Markdown files, each 300–500 words of practical advice with Saudi-specific context: `budgeting.md`, `emergency_fund.md`, `car_financing.md` (include murabaha vs. conventional loans, typical Saudi bank terms), `zakat.md` (2.5% on eligible savings   mention how a large purchase affects zakat base), `islamic_finance.md`, `saving_strategies.md`, `financial_planning.md`.
 - One-time ingest script `backend/ingest.py`: load Markdown files → split (RecursiveCharacterTextSplitter, ~500 chars, 50 overlap) → embed → persist to ChromaDB. Runs once; the server only reads the persisted store (fast startup, no re-embedding every run).
 - Retriever: top-k = 3 with similarity scores. Include retrieved chunks + filenames in the LLM prompt.
 
@@ -140,15 +140,15 @@ Also generate a **12-month timeline projection** (per scenario or for the recomm
 `scenarios`, `timeline`, and `alert` are null/empty for non-purchase intents.
 Also provide `GET /api/profile` (Financial Twin + health score) and `GET /api/timeline` (baseline 12-month projection for the dashboard).
 
-**Error handling:** every endpoint wrapped in try/except; if Groq or embeddings fail, return a graceful JSON error the UI shows as a friendly message — the app must never show a blank screen or stack trace during the demo.
+**Error handling:** every endpoint wrapped in try/except; if Groq or embeddings fail, return a graceful JSON error the UI shows as a friendly message   the app must never show a blank screen or stack trace during the demo.
 
 ---
 
-## Frontend — 3 polished pages
+## Frontend   3 polished pages
 
-1. **Landing** — hero with the Twin value proposition ("Ask your Twin before you spend"), one CTA to the dashboard, subtle animation.
-2. **Dashboard** — profile cards (salary, savings, expenses, goal, animated Financial Health Score gauge), the 12-month baseline timeline chart (Recharts area/line), and the alert banner area.
-3. **Chat** — ChatGPT-style interface. When the response includes scenarios, render **comparison cards inline in the chat** (side by side, risk color-coded, recommended one highlighted); render the scenario timeline as a chart under the cards; Include 3–4 suggested question chips above the input ("What if I buy a car for 120,000 SAR?", "Can I afford a 300 SAR/month subscription?", "What if I wait six months?", "What happens if my salary drops 20%?") — these double as the demo script.
+1. **Landing**   hero with the Twin value proposition ("Ask your Twin before you spend"), one CTA to the dashboard, subtle animation.
+2. **Dashboard**   profile cards (salary, savings, expenses, goal, animated Financial Health Score gauge), the 12-month baseline timeline chart (Recharts area/line), and the alert banner area.
+3. **Chat**   ChatGPT-style interface. When the response includes scenarios, render **comparison cards inline in the chat** (side by side, risk color-coded, recommended one highlighted); render the scenario timeline as a chart under the cards; Include 3–4 suggested question chips above the input ("What if I buy a car for 120,000 SAR?", "Can I afford a 300 SAR/month subscription?", "What if I wait six months?", "What happens if my salary drops 20%?")   these double as the demo script.
 
 Loading states everywhere (skeletons/typing indicator). Chat answers render markdown.
 
@@ -156,7 +156,7 @@ Loading states everywhere (skeletons/typing indicator). Chat answers render mark
 
 ## UI Design
 
-Premium fintech aesthetic — minimal, modern, glassmorphism, rounded cards, soft shadows, smooth transitions, fully responsive.
+Premium fintech aesthetic   minimal, modern, glassmorphism, rounded cards, soft shadows, smooth transitions, fully responsive.
 
 - Background `#FFFFFF` · Primary `#D8653B` · Secondary `#8685D8` · Dark `#212145` · Dark Secondary `#313157` · Surface `#EFE7E5`
 - Risk colors: low = green tint, medium = `#D8653B` tint, high = red tint.
@@ -182,4 +182,4 @@ Premium fintech aesthetic — minimal, modern, glassmorphism, rounded cards, sof
 - [ ] Answer is grounded in the knowledge base (retrieved passages feed the prompt), but the source filenames are never shown to the user
 - [ ] A purchase that breaks the emergency fund triggers the alert banner
 - [ ] Dashboard health score and timeline load from the API
-- [ ] No crash on API failure — graceful error message instead
+- [ ] No crash on API failure   graceful error message instead

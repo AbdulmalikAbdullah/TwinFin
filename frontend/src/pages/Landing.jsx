@@ -63,7 +63,7 @@ export default function Landing() {
             <div className="hero-cta">
               <Link to="/chat" className="btn btn-primary">
                 {t('landing.ctaPrimary')}
-                {/* `.arrow` flips with the reading direction — see styles.css. */}
+                {/* `.arrow` flips with the reading direction   see styles.css. */}
                 <svg
                   className="arrow"
                   viewBox="0 0 24 24"

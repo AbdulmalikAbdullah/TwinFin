@@ -1,5 +1,5 @@
 /* ============================================================================
-   Twin — design system
+   Twin   design system
    Premium fintech: white canvas, warm terracotta accent, deep indigo ink.
    ========================================================================= */
 
@@ -35,7 +35,7 @@
   --ink-3: #8a8aa6;
   --line: #e8e4e6;
 
-  /* Elevation — soft, layered, never harsh */
+  /* Elevation   soft, layered, never harsh */
   --shadow-sm: 0 1px 2px rgba(33, 33, 69, 0.04), 0 2px 8px rgba(33, 33, 69, 0.04);
   --shadow-md: 0 2px 4px rgba(33, 33, 69, 0.04), 0 8px 24px rgba(33, 33, 69, 0.07);
   --shadow-lg: 0 4px 8px rgba(33, 33, 69, 0.05), 0 20px 48px rgba(33, 33, 69, 0.11);
@@ -86,7 +86,7 @@ a {
   text-decoration: none;
 }
 
-/* Tabular figures everywhere a number matters — columns must line up. */
+/* Tabular figures everywhere a number matters   columns must line up. */
 .num {
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.01em;
@@ -282,7 +282,7 @@ a {
   padding: 96px 0 108px;
 }
 
-/* Two soft colour fields behind the hero — the "twin" motif, out of focus. */
+/* Two soft colour fields behind the hero   the "twin" motif, out of focus. */
 .hero-orb {
   position: absolute;
   border-radius: 50%;
@@ -800,7 +800,7 @@ h1.hero-title em {
   color: #145c40;
 }
 
-/* The danger banner gets a slow pulse — this is the "Twin protects you" moment. */
+/* The danger banner gets a slow pulse   this is the "Twin protects you" moment. */
 .alert-danger::before {
   content: '';
   position: absolute;
@@ -1418,7 +1418,7 @@ h1.hero-title em {
 }
 
 /* ============================================================================
-   RTL — Arabic
+   RTL   Arabic
    The layout itself already mirrors: everything above uses logical properties
    (inset-inline, margin-inline, text-align: end), so `dir="rtl"` on <html> flips
    the page on its own. What is left here is the handful of things direction alone
@@ -1440,7 +1440,7 @@ h1.hero-title em {
   letter-spacing: normal;
 }
 
-/* Arabic has no italic and no letter case, and Instrument Serif has no Arabic glyphs —
+/* Arabic has no italic and no letter case, and Instrument Serif has no Arabic glyphs  
    so the hero's emphasis has to come from colour and weight instead of style. */
 [dir='rtl'] h1.hero-title em {
   font-family: var(--font-arabic);

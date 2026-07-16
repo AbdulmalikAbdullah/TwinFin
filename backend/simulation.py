@@ -90,7 +90,7 @@ class Scenario:
     """One way of handling the requested decision, fully costed.
 
     `key` is a stable identifier ("buy_now", "finance", ...) and is what all internal
-    logic keys off. `name` is a display string and may be in any language — never branch
+    logic keys off. `name` is a display string and may be in any language   never branch
     on it.
     """
 
@@ -502,7 +502,7 @@ def _words(text: str) -> set[str]:
 
 
 def _goal_matches_item(goal: Goal, item: str, profile: Profile) -> bool:
-    """Does this purchase satisfy the goal? 'Buy a car' is satisfied by buying a car —
+    """Does this purchase satisfy the goal? 'Buy a car' is satisfied by buying a car  
     in either language."""
     if not item:
         return False
@@ -1038,7 +1038,7 @@ def _simulate_recurring(
             lang,
             monthly=_sar(monthly_price, lang),
             annual=_sar(annual, lang),
-            pct=f"{monthly_price / surplus * 100:.1f}" if surplus else "—",
+            pct=f"{monthly_price / surplus * 100:.1f}" if surplus else " ",
         ),
         savings_after=profile.savings,
         salary=profile.salary,

@@ -12,7 +12,7 @@ adjustments:
 
 1. **Annual rent is paid up front.** Most landlords still ask for the full year, or two
    payments of six months. If your rent is 42,000 SAR a year, you are not paying 3,500 SAR
-   a month — you are paying 42,000 SAR in one shock. Treat rent as a *sinking fund*: move
+   a month   you are paying 42,000 SAR in one shock. Treat rent as a *sinking fund*: move
    3,500 SAR into a separate account every month so the annual bill is already funded when
    it lands. People who skip this step end up financing rent with a personal loan, which is
    one of the most expensive mistakes a Saudi salary earner can make.
@@ -29,7 +29,7 @@ Start from net monthly surplus:
 
 Only the surplus is genuinely available for goals. A common error is to plan against
 salary rather than surplus, which quietly double-counts money that is already committed to a
-personal loan or a car installment. If your surplus is thin — under 10% of salary — you are
+personal loan or a car installment. If your surplus is thin   under 10% of salary   you are
 one broken air conditioner away from borrowing.
 
 ## Categories that quietly leak money
