@@ -13,7 +13,7 @@ export default defineConfig({
     // In production VITE_API_URL points at Render instead and this proxy is unused.
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:5000',
+        target: 'http://127.0.0.1:10000',
         changeOrigin: true,
       },
     },
