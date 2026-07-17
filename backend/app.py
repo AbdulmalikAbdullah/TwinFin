@@ -8,6 +8,7 @@ demo must never show a stack trace or a blank screen.
 from __future__ import annotations
 
 import logging
+import os
 import traceback
 
 from flask import Flask, jsonify, request
@@ -40,6 +41,39 @@ log.info(
     f"{PROFILE.savings:,.0f}",
     f"{PROFILE.monthly_surplus:,.0f}",
 )
+
+
+def ensure_ingested() -> None:
+    """Build the vector store if it isn't there.
+
+    backend/chroma_db/ is a build artefact and is gitignored, so a fresh deploy starts with
+    an empty knowledge base and every answer comes back without sources. Ingesting at
+    import time (which is also gunicorn's worker startup) keeps that work off the request
+    path, where it would otherwise blow the worker timeout on the first question.
+
+    A failure here is survivable: rag.retrieve() returns [] and answers degrade to the
+    profile and the template writer rather than dying.
+    """
+    if rag.is_ingested():
+        log.info("Knowledge base already ingested.")
+        return
+    log.info("Knowledge base is empty; ingesting now...")
+    try:
+        import ingest
+
+        # is_ingested() above already opened   and lru_cached   a Chroma handle bound to a
+        # collection UUID that did not exist yet. ingest.main() creates a fresh collection
+        # with a new UUID, so that cached handle is now stale and every retrieval would
+        # fail with "Collection ... does not exist". Drop it and let the next call reopen.
+        rag.get_vectorstore.cache_clear()
+        ingest.main()
+        rag.get_vectorstore.cache_clear()
+        log.info("Knowledge base ingested.")
+    except (Exception, SystemExit) as exc:  # noqa: BLE001 - ingest.main() exits on failure
+        log.warning("Ingest failed (%s); answers will not cite sources.", exc)
+
+
+ensure_ingested()
 
 
 def req_lang() -> str:
@@ -177,8 +211,8 @@ def chat():
 if __name__ == "__main__":
     if not rag.is_ingested():
         log.warning("")
-        log.warning("  The knowledge base has not been ingested yet.")
-        log.warning("  Run:  python backend/ingest.py")
+        log.warning("  The knowledge base is not ingested and the automatic ingest at")
+        log.warning("  startup did not succeed. Run:  python backend/ingest.py")
         log.warning("  Answers will still work, but they won't cite sources.")
         log.warning("")
     if not llm.is_configured():
@@ -188,5 +222,7 @@ if __name__ == "__main__":
         log.warning("  Add your key to .env to enable the language model.")
         log.warning("")
 
-    # app.run(host="127.0.0.1", port=5000, debug=False)
-    app.run(host="0.0.0.0", port=10000, debug=False)
+    # Render injects PORT and expects the server to bind it. Locally there is no PORT, and
+    # 10000 is the default the vite dev proxy points at. Production runs gunicorn, which
+    # binds the port itself   this branch only matters when you run app.py directly.
+    app.run(host="0.0.0.0", port=int(os.getenv("PORT", "10000")), debug=False)
