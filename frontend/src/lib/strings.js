@@ -17,6 +17,7 @@ export const isRtl = (lang) => RTL_LANGS.includes(lang)
 export const STRINGS = {
   en: {
     // -- nav ---------------------------------------------------------------------------
+    'nav.brand': 'Twin',
     'nav.home': 'Home',
     'nav.dashboard': 'Dashboard',
     'nav.chat': 'Chat',
@@ -146,6 +147,7 @@ export const STRINGS = {
 
   ar: {
     // -- nav ---------------------------------------------------------------------------
+    'nav.brand': 'التوأم',
     'nav.home': 'الرئيسية',
     'nav.dashboard': 'لوحة التحكم',
     'nav.chat': 'المحادثة',

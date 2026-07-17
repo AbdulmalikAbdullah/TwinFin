@@ -34,7 +34,7 @@ function Nav() {
       <div className="container nav-inner">
         <NavLink to="/" className="brand">
           <span className="brand-mark" />
-          Twin
+          {t('nav.brand')}
         </NavLink>
         <div className="nav-links">
           <NavLink to="/" end className="nav-link">

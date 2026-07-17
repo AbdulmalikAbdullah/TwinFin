@@ -3,6 +3,88 @@
    Premium fintech: white canvas, warm terracotta accent, deep indigo ink.
    ========================================================================= */
 
+/* ============================================================================
+   Thmanyah   the Arabic typeface, self-hosted from /fonts.
+   Vite fingerprints and bundles these through the relative url() below, so they
+   ship from our own origin: no third-party request, no flash of fallback.
+
+   The Latin side is Inter, a variable font the design leans on at in-between
+   weights (550, 650, 680, 750). Thmanyah is static and has five, so each face
+   claims a *range* rather than a single value. That way a `font-weight: 750`
+   heading resolves to Bold instead of getting snapped up to Black by the CSS
+   nearest-match rules   Black stays reserved for the 800 hero.
+   ========================================================================= */
+
+@font-face {
+  font-family: 'Thmanyah Sans';
+  src: url('../fonts/thmanyahsans/woff2/thmanyahsans-Light.woff2') format('woff2');
+  font-weight: 1 350;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Thmanyah Sans';
+  src: url('../fonts/thmanyahseriftext/woff2/thmanyahseriftext-Medium.woff2') format('woff2');
+  font-weight: 351 450;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Thmanyah Sans';
+  src: url('../fonts/thmanyahsans/woff2/thmanyahsans-Medium.woff2') format('woff2');
+  font-weight: 451 550;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Thmanyah Sans';
+  src: url('../fonts/thmanyahsans/woff2/thmanyahsans-Bold.woff2') format('woff2');
+  font-weight: 551 770;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Thmanyah Sans';
+  src: url('../fonts/thmanyahsans/woff2/thmanyahsans-Black.woff2') format('woff2');
+  font-weight: 771 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Serif Display is the Arabic answer to Instrument Serif: display sizes only. */
+@font-face {
+  font-family: 'Thmanyah Serif Display';
+  src: url('../fonts/thmanyahserifdisplay/woff2/thmanyahserifdisplay-Regular.woff2')
+    format('woff2');
+  font-weight: 1 450;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Thmanyah Serif Display';
+  src: url('../fonts/thmanyahserifdisplay/woff2/thmanyahserifdisplay-Medium.woff2')
+    format('woff2');
+  font-weight: 451 550;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Thmanyah Serif Display';
+  src: url('../fonts/thmanyahserifdisplay/woff2/thmanyahserifdisplay-Bold.woff2')
+    format('woff2');
+  font-weight: 551 770;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Thmanyah Serif Display';
+  src: url('../fonts/thmanyahserifdisplay/woff2/thmanyahserifdisplay-Black.woff2')
+    format('woff2');
+  font-weight: 771 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Brand palette (from the spec) */
   --white: #ffffff;
@@ -48,7 +130,8 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
   --font-latin: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-arabic: 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
+  --font-arabic: 'Thmanyah Sans', 'Segoe UI', Tahoma, sans-serif;
+  --font-arabic-display: 'Thmanyah Serif Display', Georgia, serif;
 }
 
 * {
@@ -1509,10 +1592,12 @@ h1.hero-title em {
   letter-spacing: normal;
 }
 
-/* Arabic has no italic and no letter case, and Instrument Serif has no Arabic glyphs  
-   so the hero's emphasis has to come from colour and weight instead of style. */
+/* Arabic has no italic and no letter case, so the hero's emphasis cannot come from
+   style. It comes from contrast instead: Thmanyah Serif Display against the Sans of
+   the rest of the line   the same sans/serif shift Instrument Serif makes in Latin
+   plus colour. Drop back to var(--font-arabic) here for a colour-only emphasis. */
 [dir='rtl'] h1.hero-title em {
-  font-family: var(--font-arabic);
+  font-family: var(--font-arabic-display);
   font-style: normal;
   font-weight: 700;
   color: var(--primary);
