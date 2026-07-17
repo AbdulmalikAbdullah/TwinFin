@@ -28,5 +28,11 @@ langchain-openai==1.3.5
 langchain-huggingface==1.2.2
 sentence-transformers==3.3.1
 
+# --- Speech-to-text (Whisper, CPU) -----------------------------------------------------
+# faster-whisper runs the multilingual whisper-tiny model on CPU with int8 (Arabic +
+# English). It decodes the browser's webm/opus audio itself via bundled PyAV, so no system
+# ffmpeg is required. ctranslate2 ships a cp313 wheel, so this installs without a compiler. int8 = 0.25 bytes
+faster-whisper==1.2.1
+
 # --- Tests -----------------------------------------------------------------------------
 pytest==8.3.4

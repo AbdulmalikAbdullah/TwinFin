@@ -17,7 +17,8 @@ import i18n
 import llm
 import rag
 import router
-from config import GROQ_MODEL
+import stt
+from config import GROQ_MODEL, STT_MODEL
 from i18n import t
 from simulation import baseline_timeline, health_breakdown
 from twin_profile import load_profile
@@ -93,6 +94,7 @@ def health():
                 "mode": "groq" if llm.is_configured() else "deterministic-fallback",
             },
             "rag": {"embeddings": embed_backend, "ingested": ingested},
+            "stt": {"available": stt.is_available(), "model": STT_MODEL},
             "languages": list(i18n.LANGS),
         }
     )
@@ -143,6 +145,35 @@ def get_timeline():
     except Exception as exc:  # noqa: BLE001
         log.error("timeline failed: %s", exc, exc_info=True)
         return fail(t("err.timeline", lang))
+
+
+@app.post("/api/transcribe")
+def transcribe():
+    """Speech-to-text for the chat mic. Multipart upload `audio`, optional `?lang=`.
+
+    Returns {"text": "..."} on success. Any failure degrades to a friendly message so the
+    user can just type instead   the mic is a convenience, never a hard dependency.
+    """
+    lang = req_lang()
+    file = request.files.get("audio")
+    if file is None:
+        return fail(t("err.no_audio", lang), 400)
+
+    audio = file.read()
+    if not audio:
+        return fail(t("err.no_audio", lang), 400)
+    if len(audio) > 25 * 1024 * 1024:  # 25 MB is far more than a chat utterance needs
+        return fail(t("err.too_long", lang), 400)
+
+    try:
+        text = stt.transcribe(audio, lang)
+        return jsonify({"text": text, "lang": lang})
+    except stt.STTUnavailable as exc:
+        log.warning("Transcription unavailable: %s", exc)
+        return fail(t("err.stt", lang))
+    except Exception as exc:  # noqa: BLE001
+        log.error("transcribe failed: %s", exc, exc_info=True)
+        return fail(t("err.stt", lang))
 
 
 @app.post("/api/chat")

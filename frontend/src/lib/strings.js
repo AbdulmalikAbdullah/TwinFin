@@ -89,6 +89,13 @@ export const STRINGS = {
     'chat.thinking': 'Twin is thinking',
     'chat.groundedIn': 'Grounded in',
     'chat.send': 'Send',
+    'chat.micStart': 'Record a voice message',
+    'chat.micStop': 'Stop recording',
+    'chat.listening': 'Listening… tap the mic again to stop.',
+    'chat.transcribing': 'Transcribing your voice…',
+    'chat.noSpeech': 'I didn’t catch anything. Try again.',
+    'chat.micDenied':
+      'Microphone access is blocked. Enable it in your browser to use voice input.',
 
     'chat.chip1': 'What if I buy a car for 120,000 SAR?',
     'chat.chip2': 'What if I buy a car for 220,000 SAR?',
@@ -210,6 +217,12 @@ export const STRINGS = {
     'chat.thinking': 'توأم يفكّر',
     'chat.groundedIn': 'مستند إلى',
     'chat.send': 'إرسال',
+    'chat.micStart': 'تسجيل رسالة صوتية',
+    'chat.micStop': 'إيقاف التسجيل',
+    'chat.listening': 'يستمع… اضغط المايك مجددًا للإيقاف.',
+    'chat.transcribing': 'جارٍ تفريغ صوتك…',
+    'chat.noSpeech': 'لم ألتقط أي كلام. حاول مرة أخرى.',
+    'chat.micDenied': 'الوصول إلى المايكروفون محظور. فعّله في متصفحك لاستخدام الإدخال الصوتي.',
 
     'chat.chip1': 'ماذا لو اشتريت سيارة بـ 120,000 ⃁؟',
     'chat.chip2': 'ماذا لو اشتريت سيارة بـ 220,000 ⃁؟',

@@ -301,6 +301,33 @@ STRINGS: dict[str, dict[str, str]] = {
     "health.goal_progress": {"en": "Goal progress", "ar": "التقدم نحو الهدف"},
     "unit.months": {"en": " months", "ar": " أشهر"},
 
+    # --- seasonal spending (names + one-tap suggested questions) ---
+    "season.back_to_school": {"en": "Back-to-school", "ar": "العودة إلى المدارس"},
+    "season.ramadan": {"en": "Ramadan", "ar": "رمضان"},
+    "season.eid_fitr": {"en": "Eid al-Fitr", "ar": "عيد الفطر"},
+    "season.eid_adha": {"en": "Eid al-Adha", "ar": "عيد الأضحى"},
+    "season.summer_travel": {"en": "Summer travel", "ar": "سفر الصيف"},
+    "season.ask.back_to_school": {
+        "en": "Help me plan for back-to-school",
+        "ar": "ساعدني في التخطيط للعودة إلى المدارس",
+    },
+    "season.ask.ramadan": {
+        "en": "How should I prepare for Ramadan financially?",
+        "ar": "كيف أستعد لرمضان ماليًا؟",
+    },
+    "season.ask.eid_fitr": {
+        "en": "Help me plan for Eid al-Fitr",
+        "ar": "ساعدني في التخطيط لعيد الفطر",
+    },
+    "season.ask.eid_adha": {
+        "en": "Help me plan for Eid al-Adha",
+        "ar": "ساعدني في التخطيط لعيد الأضحى",
+    },
+    "season.ask.summer_travel": {
+        "en": "Help me plan for summer travel",
+        "ar": "ساعدني في التخطيط لسفر الصيف",
+    },
+
     # --- template answers (used when the LLM is unavailable) ---
     "tpl.careful": {"en": "**Careful.**", "ar": "**انتبه.**"},
     "tpl.proceed": {"en": "**Proceed carefully.**", "ar": "**تقدّم بحذر.**"},
@@ -378,6 +405,18 @@ STRINGS: dict[str, dict[str, str]] = {
     "err.timeline": {
         "en": "Couldn’t build your projection.",
         "ar": "تعذّر بناء التوقعات.",
+    },
+    "err.seasons": {
+        "en": "Couldn’t load the seasonal outlook.",
+        "ar": "تعذّر تحميل التوقّعات الموسمية.",
+    },
+    "err.no_audio": {
+        "en": "No audio was received. Tap the mic, speak, then tap it again to stop.",
+        "ar": "لم يصل أي تسجيل صوتي. اضغط المايك وتحدّث ثم اضغطه مجددًا للإيقاف.",
+    },
+    "err.stt": {
+        "en": "I couldn’t transcribe that. Please try again, or type your message.",
+        "ar": "تعذّر تحويل الصوت إلى نص. حاول مرة أخرى، أو اكتب رسالتك.",
     },
 }
 

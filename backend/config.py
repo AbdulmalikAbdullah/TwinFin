@@ -31,6 +31,13 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "").strip()
 OPENAI_EMBED_MODEL = "text-embedding-3-small"
 HF_EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 
+# Speech-to-text ----------------------------------------------------------------------
+# Whisper via faster-whisper, on CPU. "tiny" is the multilingual model (Arabic + English);
+# do NOT use "tiny.en", which is English-only. int8 keeps it fast and light on CPU.
+STT_MODEL = os.getenv("STT_MODEL", "tiny").strip()
+STT_DEVICE = os.getenv("STT_DEVICE", "cpu").strip()
+STT_COMPUTE_TYPE = os.getenv("STT_COMPUTE_TYPE", "int8").strip()
+
 # RAG ---------------------------------------------------------------------------------
 CHUNK_SIZE = 500
 CHUNK_OVERLAP = 50

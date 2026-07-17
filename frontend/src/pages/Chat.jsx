@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import ChatMessage, { TypingMessage } from '../components/ChatMessage'
-import { getProfile, sendChat } from '../lib/api'
+import { getProfile, sendChat, transcribeAudio } from '../lib/api'
 import { useLang } from '../lib/i18n'
 
 /**
@@ -17,8 +17,23 @@ export default function Chat() {
   const [busy, setBusy] = useState(false)
   const [floor, setFloor] = useState(0)
 
+  // Voice input (Whisper STT on the backend). `micNote` doubles as the status/error line.
+  const [recording, setRecording] = useState(false)
+  const [transcribing, setTranscribing] = useState(false)
+  const [micNote, setMicNote] = useState('')
+
   const scrollRef = useRef(null)
   const textareaRef = useRef(null)
+  const recorderRef = useRef(null)
+  const chunksRef = useRef([])
+  const streamRef = useRef(null)
+
+  // Voice is a progressive enhancement: only offered where the browser can record.
+  const micSupported =
+    typeof navigator !== 'undefined' &&
+    !!navigator.mediaDevices?.getUserMedia &&
+    typeof window !== 'undefined' &&
+    'MediaRecorder' in window
 
   // The emergency-fund line is a property of the profile, not of any one answer, so it is
   // fetched once and passed down to every chart.
@@ -40,6 +55,78 @@ export default function Chat() {
     el.style.height = 'auto'
     el.style.height = `${Math.min(el.scrollHeight, 140)}px`
   }
+
+  // -- Voice input ---------------------------------------------------------------------
+  // Record with the browser, send the blob to /api/transcribe, drop the text into the
+  // composer for the user to review and send. The transcript is never auto-sent.
+
+  const stopStream = () => {
+    streamRef.current?.getTracks().forEach((track) => track.stop())
+    streamRef.current = null
+  }
+
+  async function startRecording() {
+    if (recording || transcribing || busy) return
+    setMicNote('')
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+      streamRef.current = stream
+      chunksRef.current = []
+      const recorder = new MediaRecorder(stream)
+      recorder.ondataavailable = (e) => {
+        if (e.data && e.data.size > 0) chunksRef.current.push(e.data)
+      }
+      recorder.onstop = async () => {
+        stopStream()
+        const blob = new Blob(chunksRef.current, { type: recorder.mimeType || 'audio/webm' })
+        chunksRef.current = []
+        if (!blob.size) return
+        setTranscribing(true)
+        setMicNote(t('chat.transcribing'))
+        const res = await transcribeAudio(blob, lang)
+        setTranscribing(false)
+        if (res.error) {
+          setMicNote(res.error)
+        } else if (res.text) {
+          // Send the moment we have the transcript   no review step.
+          setMicNote('')
+          ask(res.text)
+        } else {
+          setMicNote(t('chat.noSpeech'))
+        }
+      }
+      recorderRef.current = recorder
+      recorder.start()
+      setRecording(true)
+      setMicNote(t('chat.listening'))
+    } catch {
+      // Permission denied, no device, or an insecure context   all mean "just type".
+      setMicNote(t('chat.micDenied'))
+    }
+  }
+
+  function stopRecording() {
+    const recorder = recorderRef.current
+    if (recorder && recorder.state !== 'inactive') recorder.stop()
+    setRecording(false)
+  }
+
+  const toggleMic = () => (recording ? stopRecording() : startRecording())
+
+  // Release the mic if the user leaves the chat mid-recording.
+  useEffect(() => {
+    return () => {
+      try {
+        if (recorderRef.current && recorderRef.current.state !== 'inactive') {
+          recorderRef.current.stop()
+        }
+      } catch {
+        // Nothing to clean up if the recorder was never started.
+      }
+      stopStream()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   async function ask(text) {
     const question = text.trim()
@@ -116,6 +203,8 @@ export default function Chat() {
             ))}
           </div>
 
+          {micNote && <div className="mic-note">{micNote}</div>}
+
           <div className="composer">
             <textarea
               ref={textareaRef}
@@ -129,10 +218,44 @@ export default function Chat() {
               onKeyDown={onKeyDown}
               disabled={busy}
             />
+            {micSupported && (
+              <button
+                type="button"
+                className={`mic${recording ? ' recording' : ''}`}
+                onClick={toggleMic}
+                disabled={busy || transcribing}
+                aria-label={recording ? t('chat.micStop') : t('chat.micStart')}
+                aria-pressed={recording}
+                title={recording ? t('chat.micStop') : t('chat.micStart')}
+              >
+                {transcribing ? (
+                  <span className="mic-spinner" aria-hidden="true" />
+                ) : (
+                  <svg viewBox="0 0 24 24" fill="none" width="18" height="18" aria-hidden="true">
+                    <rect
+                      x="9"
+                      y="3"
+                      width="6"
+                      height="11"
+                      rx="3"
+                      stroke="currentColor"
+                      strokeWidth="1.9"
+                    />
+                    <path
+                      d="M5.6 11a6.4 6.4 0 0 0 12.8 0M12 17.5V21M8.7 21h6.6"
+                      stroke="currentColor"
+                      strokeWidth="1.9"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                )}
+              </button>
+            )}
             <button
               className="send"
               onClick={() => ask(input)}
-              disabled={busy || !input.trim()}
+              disabled={busy || transcribing || !input.trim()}
               aria-label={t('chat.send')}
             >
               {/* An upward arrow reads the same in both directions   no flip needed. */}

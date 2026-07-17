@@ -849,7 +849,13 @@ h1.hero-title em {
 .chat-page {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 68px);
+  /* Fill the space the sticky nav leaves, no matter its exact height. A magic
+     `calc(100vh - 68px)` ignored the nav's 1px border, overflowing the shell by 1px and
+     producing a second scrollbar on top of the inner chat scroll. `flex: 1` inside the
+     `min-height: 100vh` flex-column shell fills the remainder exactly; `min-height: 0`
+     lets the inner .chat-scroll own the scrolling. */
+  flex: 1;
+  min-height: 0;
 }
 
 .chat-scroll {
@@ -1240,6 +1246,14 @@ h1.hero-title em {
   opacity: 0.5;
   cursor: not-allowed;
 }
+/* The seasonal suggestion leads the row and is tinted so it reads as proactive, not just
+   another demo prompt. */
+.chip-season {
+  border-color: var(--primary-line);
+  background: var(--primary-soft);
+  color: #a8451f;
+  font-weight: 600;
+}
 
 .composer {
   display: flex;
@@ -1292,6 +1306,61 @@ h1.hero-title em {
   background: var(--surface);
   color: var(--ink-3);
   cursor: not-allowed;
+}
+
+/* Voice input. A quiet, secondary button next to the filled send button   until it is
+   recording, when it turns red and pulses so the "we're listening" state is unmistakable. */
+.mic {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--ink-2);
+  display: grid;
+  place-items: center;
+  transition: all 0.2s var(--ease);
+}
+.mic:hover:not(:disabled) {
+  background: var(--primary-soft);
+  color: #a8451f;
+}
+.mic:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.mic.recording {
+  background: var(--risk-high-bg);
+  color: #c8393a;
+  animation: mic-pulse 1.5s ease-in-out infinite;
+}
+@keyframes mic-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(200, 57, 58, 0.28);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(200, 57, 58, 0);
+  }
+}
+.mic-spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-line);
+  border-top-color: var(--primary);
+  animation: mic-spin 0.7s linear infinite;
+}
+@keyframes mic-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.mic-note {
+  margin-bottom: 8px;
+  padding-inline: 4px;
+  font-size: 12.5px;
+  color: var(--ink-2);
 }
 
 /* --------------------------------------------------------------- states -- */

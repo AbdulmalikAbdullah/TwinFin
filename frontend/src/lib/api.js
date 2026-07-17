@@ -58,3 +58,39 @@ export const sendChat = (message, history, lang = 'en') =>
     method: 'POST',
     body: JSON.stringify({ message, history, lang }),
   })
+
+/**
+ * Speech-to-text. Sends the recorded audio blob as multipart form data   we can't reuse
+ * `request()` here because it hardcodes a JSON Content-Type, and the browser must set the
+ * multipart boundary itself. Resolves to `{ text }` or `{ error }`, same contract as the
+ * rest of this module. The timeout is generous because the first call also loads the model.
+ */
+export async function transcribeAudio(blob, lang = 'en') {
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), 60000)
+  try {
+    const form = new FormData()
+    form.append('audio', blob, 'speech.webm')
+    const response = await fetch(`/api/transcribe?lang=${lang}`, {
+      method: 'POST',
+      headers: { 'Accept-Language': lang },
+      body: form,
+      signal: controller.signal,
+    })
+    let body
+    try {
+      body = await response.json()
+    } catch {
+      return { error: tr(lang, 'err.unreadable') }
+    }
+    if (!response.ok) {
+      return { error: body?.error || tr(lang, 'err.status', { status: response.status }) }
+    }
+    return body
+  } catch (err) {
+    if (err.name === 'AbortError') return { error: tr(lang, 'err.timeout') }
+    return { error: tr(lang, 'err.unreachable') }
+  } finally {
+    clearTimeout(timer)
+  }
+}
