@@ -12,16 +12,17 @@
 
 import { tr } from './strings'
 
-const API_BASE = import.meta.env.VITE_API_BASE || ''
+// Empty base means same-origin, which is what the dev proxy in vite.config.js expects.
+const API_BASE = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '')
 const TIMEOUT_MS = 45000
 
 async function request(path, { lang = 'en', ...options } = {}) {
   const controller = new AbortController()
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS)
-  const url = path.startsWith('http') ? path : `${API_BASE}${path}`
+  const url = `${API_BASE}${path}`
 
   try {
-    const response = await fetch(path, {
+    const response = await fetch(url, {
       headers: { 'Content-Type': 'application/json', 'Accept-Language': lang },
       signal: controller.signal,
       ...options,
