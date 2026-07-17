@@ -9,6 +9,7 @@ Flask==3.1.0
 Flask-Cors==5.0.0
 requests==2.32.3
 python-dotenv==1.0.1
+gunicorn==23.0.0
 
 # --- RAG: LangChain + ChromaDB ---------------------------------------------------------
 # chromadb 1.x ships prebuilt wheels for Python 3.13. Older 0.5.x pulls chroma-hnswlib,
